@@ -14,6 +14,7 @@
 #      rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
+  root "users#index"
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
