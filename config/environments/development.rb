@@ -47,7 +47,6 @@ Rails.application.configure do
     password:             Rails.application.credentials.mailer[:password],
     authentication:       'plain',
     enable_starttls_auto: true,
-    # TODO: Remove this
     openssl_verify_mode:  'none'
   }
 
