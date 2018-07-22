@@ -77,4 +77,12 @@ $curl -d '{"title":"test5", "content":"lorem5"}' -H "Content-Type: application/j
 # PUT    /articles/:id
 
 # DELETE /articles/:id
+
+# https://rubyplus.com/articles/4921-Rails-Forgery-Protection-Basics
+# 
+curl http://localhost:3000/users/new --cookie-jar "cookie.txt"
+
+# after this command, you will see a authenticity_token, please remember it.
+
+curl http://localhost:3000/users --request POST --cookie-jar "cookie.txt" --cookie "cookie.txt" --data-urlencode "authenticity_token=cOusCzjDwAt6ybUCAICCw9W4Fq9jwOr8Tys7qn8+Sa6F/Pj/d8WzgisX7U6xEUrSUqQSBvi1WpK4GdXUdMoPOA==" --data "user[name]=Foo" --data "user[email]=foobar@gmail.com" --data "user[username]=foobar" --data "user[phone]=123" 
 ```
