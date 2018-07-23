@@ -1,15 +1,16 @@
 # == Route Map
 #
 #                    Prefix Verb   URI Pattern                                                                              Controller#Action
-#             friends_index GET    /friends/index(.:format)                                                                 friends#index
-#           friends_destroy GET    /friends/destroy(.:format)                                                               friends#destroy
-#           friend_requests GET    /friend_requests(.:format)                                                               friend_requests#index
-#                           POST   /friend_requests(.:format)                                                               friend_requests#create
-#            friend_request GET    /friend_requests/:id(.:format)                                                           friend_requests#show
-#                           PATCH  /friend_requests/:id(.:format)                                                           friend_requests#update
-#                           PUT    /friend_requests/:id(.:format)                                                           friend_requests#update
-#                           DELETE /friend_requests/:id(.:format)                                                           friend_requests#destroy
 #                      root GET    /                                                                                        users#index
+#      user_friend_requests GET    /users/:user_id/friend_requests(.:format)                                                friend_requests#index
+#                           POST   /users/:user_id/friend_requests(.:format)                                                friend_requests#create
+#       user_friend_request GET    /users/:user_id/friend_requests/:id(.:format)                                            friend_requests#show
+#                           PATCH  /users/:user_id/friend_requests/:id(.:format)                                            friend_requests#update
+#                           PUT    /users/:user_id/friend_requests/:id(.:format)                                            friend_requests#update
+#                           DELETE /users/:user_id/friend_requests/:id(.:format)                                            friend_requests#destroy
+#              user_friends GET    /users/:user_id/friends(.:format)                                                        friends#index
+#        user_friends_index GET    /users/:user_id/friends/index(.:format)                                                  friends#index
+#      user_friends_destroy GET    /users/:user_id/friends/destroy(.:format)                                                friends#destroy
 #                     users GET    /users(.:format)                                                                         users#index
 #                           POST   /users(.:format)                                                                         users#create
 #                      user GET    /users/:id(.:format)                                                                     users#show
@@ -23,10 +24,12 @@
 #      rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
-  get 'friends/index'
-  get 'friends/destroy'
-  resources :friend_requests
-  root to: "users#index"
-  resources :users
+  root to: "users#index"  
+  resources :users do
+  	resources :friend_requests
+  	get "friends", to: "friends#index"  	
+  	get "friends/index"
+  	get "friends/destroy"
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
