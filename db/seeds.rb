@@ -20,3 +20,7 @@ for i in 0..9 do
 	u.last_online = DateTime.now - Random.rand(0..3.0)
 	u.save
 end
+
+for i in 1..((User.count) - 1) do
+	
+end

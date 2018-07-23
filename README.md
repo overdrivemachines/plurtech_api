@@ -114,3 +114,6 @@ curl http://localhost:3000/users/new --cookie-jar "cookie.txt"
 
 curl http://localhost:3000/users --request POST --cookie-jar "cookie.txt" --cookie "cookie.txt" --data-urlencode "authenticity_token=cOusCzjDwAt6ybUCAICCw9W4Fq9jwOr8Tys7qn8+Sa6F/Pj/d8WzgisX7U6xEUrSUqQSBvi1WpK4GdXUdMoPOA==" --data "user[name]=Foo" --data "user[email]=foobar@gmail.com" --data "user[username]=foobar" --data "user[phone]=123" 
 ```
+
+## References
+- Mutual friendship in Rails - https://dankim.io/mutual-friendship-rails/
