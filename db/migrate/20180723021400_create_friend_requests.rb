@@ -6,5 +6,9 @@ class CreateFriendRequests < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_index :friend_requests, :user_id
+    add_index :friend_requests, :friend_id
+    add_index :friend_requests, [:user_id, :friend_id], unique: true
   end
 end
