@@ -24,6 +24,8 @@ Messages
 - location
 - images,etc
 
+Friends
+
 Last viewed message
  
 

@@ -43,6 +43,8 @@ group :development do
   gem 'rails-erd'
   # Annotate classes with schema and routes info
   gem 'annotate'
+  # Generate fake data such as names, addresses, and phone numbers
+  gem 'faker'
 end
 
 
