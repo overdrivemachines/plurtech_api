@@ -59,10 +59,18 @@ class FriendRequest < ApplicationRecord
     end
   end
 
-  # don't allow friend requests if already pending
+  # Don't allow friend requests if already pending
+  # Can't send a request to a friend who has already requested you to be thier friend
+  # f = FriendRequest.create(user_id: 3, friend_id: 4)
+  #   commit transaction
+  # f = FriendRequest.create(user_id: 4, friend_id: 3)
+  #   rollback transaction
+  # f.errors.full_messages
+  #   => ["Friend already requested friendship"]
+  # u4.incoming_friend_requests.include?(u3.friend_requests)
   def not_pending
-    if friend.pending_friends.include?(user)
-      errors.add(:friend, 'already requested friendship') 
+    if user.incoming_friend_requests.pluck(:user_id).include?(friend_id)
+      errors.add(:friend, 'already requested friendship')
     end
   end
 end
