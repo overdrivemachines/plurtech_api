@@ -78,6 +78,29 @@ $ rails db:seed
 
 * Services (job queues, cache servers, search engines, etc.)
 
+## API
+
+- View all Users
+`GET /users`
+
+- Individual User
+`GET /users/1`
+`GET /users/2`
+
+- View User's Friends
+`GET /users/1/friends`
+`GET /users/2/friends`
+
+- View User's Incoming and Outgoing Friend Requests
+`GET /users/1/friend_requests`
+`GET /users/2/friend_requests`
+
+- View Only User's Incoming Friend Requests
+`GET /users/1/friend_requests/incoming`
+
+- View Only User's Outgoing Friend Requests
+`GET /users/1/friend_requests/outgoing`
+
 ## Easy Development
 - Shortcuts to SSH clients - https://askubuntu.com/questions/754450/shortcuts-to-ssh-clients
 
@@ -115,5 +138,11 @@ curl http://localhost:3000/users/new --cookie-jar "cookie.txt"
 curl http://localhost:3000/users --request POST --cookie-jar "cookie.txt" --cookie "cookie.txt" --data-urlencode "authenticity_token=cOusCzjDwAt6ybUCAICCw9W4Fq9jwOr8Tys7qn8+Sa6F/Pj/d8WzgisX7U6xEUrSUqQSBvi1WpK4GdXUdMoPOA==" --data "user[name]=Foo" --data "user[email]=foobar@gmail.com" --data "user[username]=foobar" --data "user[phone]=123" 
 ```
 
+
+
 ## References
 - Mutual friendship in Rails - https://dankim.io/mutual-friendship-rails/
+- Friendship fix - https://stackoverflow.com/questions/50614670/activerecordstatementinvalid-sqlite3sqlexception-no-such-table
+- Self-Referential Association - http://railscasts.com/episodes/163-self-referential-association
+- Faker::Avatar - https://github.com/stympy/faker/blob/master/doc/avatar.md
+- Pluck vs select. Pluck takes lesser time but select returns the actual object - http://gavinmiller.io/2013/getting-to-know-pluck-and-select/
