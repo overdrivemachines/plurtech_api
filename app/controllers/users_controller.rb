@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
+    # TODO: limit viewing all users
     @users = User.all
 
     render json: @users
@@ -10,6 +11,11 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    # TODO: find a nice way to show both user details and friends
+    # render json: {
+    #   user: @user,
+    #   friends: @user.friends
+    # }.to_json
     render json: @user
   end
 
