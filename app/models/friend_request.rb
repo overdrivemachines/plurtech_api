@@ -14,7 +14,7 @@ class FriendRequest < ApplicationRecord
   belongs_to :friend, class_name: 'User'
   
   # User needs to be present
-  validates :user, presence: true
+  validates :user_id, presence: true
   
   # Friend needs to be present and prevent repeats of the same row
   # f = FriendRequest.create(user_id: 2, friend_id: 3)
@@ -22,8 +22,8 @@ class FriendRequest < ApplicationRecord
   # f = FriendRequest.create(user_id: 2, friend_id: 3)
   #   rollback transaction
   # f.errors.full_messages
-  #  => ["Friend has already been taken"]
-  validates :friend, presence: true, uniqueness: { scope: :user }
+  #  => ["Friend cannot be sent a request. User already requested friendship"]
+  validates :friend, presence: true, uniqueness: { scope: :user, message: "cannot be sent a request. User already requested friendship" }
 
 
   validate :not_self # Don't allow friend requests to yourself
@@ -31,8 +31,18 @@ class FriendRequest < ApplicationRecord
   validate :not_pending # Don't allow friend requests if already pending
 
   def accept
-    user.friends << friend
-    destroy
+    # TODO: only allow user with incoming friendship to accept
+    # puts "user: " + user.name
+    # puts "self.user: " + self.user.name
+    # puts "friend: " + friend.name
+    # Not working:
+    # user.friends << friend
+    fr = Friendship.new(user_id: user_id, friend_id: friend_id)
+    if(fr.save)
+      destroy
+    else
+      puts fr.errors.full_messages.to_s
+    end
   end
 
   def deny
@@ -56,7 +66,7 @@ class FriendRequest < ApplicationRecord
   def not_friends
     if user.friends.include?(friend)
       errors.add(:friend, 'is already added') 
-    end
+    end  
   end
 
   # Don't allow friend requests if already pending
@@ -69,6 +79,9 @@ class FriendRequest < ApplicationRecord
   #   => ["Friend already requested friendship"]
   # u4.incoming_friend_requests.include?(u3.friend_requests)
   def not_pending
+    if user_id.blank?
+      return
+    end
     if user.incoming_friend_requests.pluck(:user_id).include?(friend_id)
       errors.add(:friend, 'already requested friendship')
     end
