@@ -1,17 +1,23 @@
 class FriendsController < ApplicationController
+  before_action :set_user
   before_action :set_friend, only: :destroy
   def index
-    @friends = current_user.friends
+    @friends = @user.friends
+    render json: @friends
   end
 
   def destroy
-    current_user.remove_friend(@friend)
+    @user.remove_friend(@friend)
     head :no_content
   end
 
   private
 
   def set_friend
-    @friend = current_user.friends.find(params[:id])
+    @friend = @user.friends.find(params[:id])
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
   end
 end
