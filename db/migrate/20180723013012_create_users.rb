@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :email
       t.string :username
+      t.string :profile_picture
       t.string :phone
       t.string :facebook
       t.string :snapchat

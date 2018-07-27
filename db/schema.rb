@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2018_07_23_022812) do
     t.string "name"
     t.string "email"
     t.string "username"
+    t.string "profile_picture"
     t.string "phone"
     t.string "facebook"
     t.string "snapchat"
