@@ -23,7 +23,7 @@ end
 
 # Friend Requests
 User.all.each do |u|
-	for i in 0..(rand(1..8)) do
+	for i in 0..(rand(1..15)) do
 		f = User.offset(rand(User.count)).first
 		print "Request from " + u.name + ": " + u.id.to_s + " to " + f.name + ": " + f.id.to_s + " => "
 
