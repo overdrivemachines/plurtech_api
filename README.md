@@ -74,20 +74,20 @@ $ rails db:seed
 
 ## API
 
-- View all Users <br>
+- View all Users
 ~~~~
 GET /users
 ~~~~
 
-- View Individual User <br>
+- View Individual User
 ~~~~
 GET /users/1 <br>
 GET /users/2
 ~~~~
 
-- View User's Friends <br>
+- View User's Friends
 ~~~~
-GET /users/1/friends <br>
+GET /users/1/friends
 GET /users/2/friends
 ~~~~
 
@@ -97,12 +97,12 @@ GET /users/1/friend_requests
 GET /users/2/friend_requests
 ~~~~
 
-- View User's Incoming Friend Requests <br>
+- View User's Incoming Friend Requests
 ~~~~
 GET /users/1/friend_requests/incoming
 ~~~~
 
-- View User's Outgoing Friend Requests <br>
+- View User's Outgoing Friend Requests
 ~~~~
 GET /users/1/friend_requests/outgoing
 ~~~~
