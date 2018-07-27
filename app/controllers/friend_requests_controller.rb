@@ -1,5 +1,5 @@
 class FriendRequestsController < ApplicationController
-  before_action :set_friend_request, except: [:index, :create]
+  before_action :set_friend_request, except: [:index, :create, :incoming, :outgoing]
   before_action :set_user
 
   def index
@@ -12,6 +12,16 @@ class FriendRequestsController < ApplicationController
       outgoing: @outgoing
     }.to_json
 
+  end
+
+  def incoming
+    incoming = FriendRequest.where(friend: @user).pluck(:user_id)
+    render json: incoming
+  end
+
+  def outgoing
+    outgoing = @user.friend_requests.pluck(:friend_id)
+    render json: outgoing
   end
 
   def create
