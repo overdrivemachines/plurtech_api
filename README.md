@@ -81,7 +81,7 @@ GET /users
 
 - View Individual User
 ~~~~
-GET /users/1 <br>
+GET /users/1
 GET /users/2
 ~~~~
 
@@ -125,6 +125,13 @@ GET /users/1/friend_requests/outgoing
 - Installing Passenger + Nginx on Ubuntu 16.04 LTS - https://www.phusionpassenger.com/library/install/nginx/install/oss/xenial/
 - Deploying a Ruby app on a Linux/Unix production server - https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/ownserver/nginx/oss/xenial/deploy_app.html
 - Deploying application updates - https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/ownserver/nginx/oss/deploy_updates.html
+~~~
+git pull
+bundle install --deployment --without development test
+DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rails db:drop RAILS_ENV=production
+rails db:migrate RAILS_ENV=production
+rails db:seed RAILS_ENV=production
+~~~
 
 ## Testing
 ```bash
