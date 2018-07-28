@@ -43,13 +43,14 @@ group :development do
   gem 'rails-erd'
   # Annotate classes with schema and routes info
   gem 'annotate'
-  # Generate fake data such as names, addresses, and phone numbers
-  gem 'faker'
 end
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Generate fake data such as names, addresses, and phone numbers
+gem 'faker'
 
 # User authentication
 gem 'devise'
