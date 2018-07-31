@@ -24,6 +24,14 @@ class User < ApplicationRecord
 	has_many :friendships, dependent: :destroy
 	has_many :friends, class_name: "Friendship", foreign_key: "friend_id"
 
+	has_many :posts, dependent: :destroy
+
+	validates :name, presence: true, length: { in: 4..70 }
+	validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+	validates :username, presence: true, uniqueness: true
+
+	before_validation :downcase_fields
+
 	def send_friend_request(f)
 		self.friend_requests.create(friend_id: f.id)
 	end
@@ -61,5 +69,10 @@ class User < ApplicationRecord
 
 	# Denies friend request from friend f
 	def deny_friend_request(fid)
+	end
+
+	def downcase_fields
+		self.email.downcase
+		self.username.downcase
 	end
 end
