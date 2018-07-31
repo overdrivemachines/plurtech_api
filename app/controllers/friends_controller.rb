@@ -19,7 +19,8 @@ class FriendsController < ApplicationController
   private
 
   def set_friend
-    @friend = @user.friends.find_by_id(params[:id])
+    set_user
+    @friend = @user.friends.find_by_user_id(params[:id])
     if (@friend.nil?)
       head :not_found
     end
