@@ -25,8 +25,11 @@ class UsersController < ApplicationController
 
     if @user.save
       render json: @user, status: :created, location: @user
+      # head :created, location: user_path(@user)
+      # render json: {status: :created, message: "Successfully created User" user: @user}, status: :created, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
+      # render json: {status: :unprocessable_entity, errors: @user.errors}.to_json, status: :unprocessable_entity
     end
   end
 
@@ -42,12 +45,19 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     @user.destroy
+    head :no_content
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      # Avoid ActiveRecord::RecordNotFound
+      # https://stackoverflow.com/questions/9709659/rails-find-getting-activerecordrecordnotfound
+      # @user = User.find(params[:id])
+      @user = User.find_by_id(params[:id])
+      if (@user.nil?)
+        head :not_found
+      end
     end
 
     # Only allow a trusted parameter "white list" through.
