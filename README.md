@@ -106,7 +106,13 @@ RESPONSE ON FAILURE: 404 Not Found
 ~~~~
 
 - Create User
+Constraints:
+1) username is unique
+2) name is between 4 and 70 characters
+3) email must be of valid format
 ~~~
+
+
 POST /users
 curl -i \
 -H "Accept: application/json" \
@@ -130,6 +136,7 @@ If the same request is sent again, we get an error because the email and usernam
 
 - Update User
 ~~~
+Update any attribute(s). Never attempt to update id, created_at and updated_at attributes:
 PATCH /users/5
 {"name":"Dipen Chauhan","email":"get.dipen@gmail.com","username":"dc555"}
 
@@ -166,7 +173,7 @@ GET /users/1/friends
 GET /users/2/friends
 ~~~~
 
-- View User's Incoming and Outgoing Friend Requests <br>
+- View User's Incoming and Outgoing Friend Requests
 ~~~~
 GET /users/1/friend_requests
 GET /users/2/friend_requests
@@ -244,3 +251,4 @@ curl http://localhost:3000/users --request POST --cookie-jar "cookie.txt" --cook
 - Self-Referential Association - http://railscasts.com/episodes/163-self-referential-association
 - Faker::Avatar - https://github.com/stympy/faker/blob/master/doc/avatar.md
 - Pluck vs select. Pluck takes lesser time but select returns the actual object - http://gavinmiller.io/2013/getting-to-know-pluck-and-select/
+- Counter Cache - https://rubyplus.com/articles/3221-Counter-Cache-Column-in-Rails-5
