@@ -84,6 +84,25 @@ GET /users
 ~~~~
 GET /users/1
 GET /users/2
+GET /users/5
+RESPONSE ON SUCCESS:
+{
+"id": 5,
+"name": "Arlette Dickinson",
+"email": "dickinson.arlette@hotmail.com",
+"username": "dickinson.arlette",
+"profile_picture": null,
+"phone": "545-259-2169",
+"facebook": "https://www.facebook.com/XXX/",
+"snapchat": "",
+"twitter": "https://twitter.com/XXXX",
+"instagram": "https://www.instagram.com/XXXX/",
+"last_online": "2018-07-27T17:22:03.600Z",
+"created_at": "2018-07-29T22:12:06.620Z",
+"updated_at": "2018-07-29T22:12:06.620Z"
+}
+
+RESPONSE ON FAILURE: 404 Not Found
 ~~~~
 
 - Create User
@@ -106,6 +125,30 @@ If the same request is sent again, we get an error because the email and usernam
 {
 "email": ["has already been taken"],
 "username": ["has already been taken"],
+}
+~~~
+
+- Update User
+~~~
+PATCH /users/5
+{"name":"Dipen Chauhan","email":"get.dipen@gmail.com","username":"dc555"}
+
+Head: 200 OK
+
+{
+"id": 5,
+"name": "Dipen Chauhan",
+"email": "get.dipen@gmail.com",
+"username": "dc555",
+"profile_picture": "https://robohash.org/perspiciatisdoloremenim.png?size=300x300&set=set1",
+"phone": "1-223-768-6488",
+"facebook": "https://www.facebook.com/frank.reynolds/",
+"snapchat": "",
+"twitter": "https://twitter.com/frank.reynolds",
+"instagram": "https://www.instagram.com/frank.reynolds/",
+"last_online": "2018-07-29T03:25:46.112Z",
+"created_at": "2018-07-31T00:52:08.792Z",
+"updated_at": "2018-07-31T02:21:31.074Z"
 }
 ~~~
 
