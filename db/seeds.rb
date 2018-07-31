@@ -11,18 +11,20 @@ for i in 0..20 do
 	u.name = Faker::Name.name
 	u.email = Faker::Internet.free_email(u.name)
 	u.username = Faker::Internet.user_name(u.name)
+	u.profile_picture = Faker::Avatar.image
 	u.phone = Faker::PhoneNumber.cell_phone
 	# TODO format phone
-	u.facebook = "https://www.facebook.com/DonaldTrump/"
+	u.facebook = "https://www.facebook.com/" + u.username + "/"
 	u.snapchat = ""
-	u.twitter = "https://twitter.com/realDonaldTrump"
-	u.instagram = "https://www.instagram.com/realdonaldtrump/"
+	u.twitter = "https://twitter.com/" + u.username
+	u.instagram = "https://www.instagram.com/" + u.username + "/"
 	u.last_online = DateTime.now - Random.rand(0..3.0)
 	u.save
 end
 
 # Friend Requests
 User.all.each do |u|
+	# Each user sends 15 friend requests
 	for i in 0..(rand(1..15)) do
 		f = User.offset(rand(User.count)).first
 		print "Request from " + u.name + ": " + u.id.to_s + " to " + f.name + ": " + f.id.to_s + " => "
@@ -38,12 +40,17 @@ User.all.each do |u|
 	puts ""
 end
 
-FriendRequest.all.each do |fr|
+FriendRequest.all.shuffle.each do |fr|
 	random_number = rand(0..1)
 	if (random_number == 1)
 		puts fr.user_id.to_s + " is friends with " + fr.friend_id.to_s
 		fr.accept
 	end
+end
+
+## Test Delete Friend
+User.all.shuffle.each do |u|
+	
 end
 
 # Friend
