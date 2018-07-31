@@ -173,6 +173,16 @@ GET /users/1/friends
 GET /users/2/friends
 ~~~~
 
+- Delete Friend
+~~~
+The following will delete user3 from user1's friend list. user3 is user having id 3 and user1 is user having id 1.
+
+DELETE /users/1/friends/3
+
+SUCCESS: 204 No Content
+FAILURE: 404 Not Found
+~~~
+
 - View User's Incoming and Outgoing Friend Requests
 ~~~~
 GET /users/1/friend_requests
