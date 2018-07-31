@@ -74,6 +74,7 @@ $ rails db:seed
 
 ## API
 
+###Users
 - View all Users
 ~~~~
 GET /users
@@ -84,6 +85,37 @@ GET /users
 GET /users/1
 GET /users/2
 ~~~~
+
+- Create User
+~~~
+POST /users
+curl -i \
+-H "Accept: application/json" \
+-H "Content-type: application/json" \
+-X POST \
+-d '{"name":"Dipen Chauhan", "email":"get.dipen@gmail.com", "username":"dipen.chauhan"}' \
+http://localhost:3000/users
+
+RESPONSE ON SUCCESS:
+201 Created
+
+RESPONSE ON FAILURE:
+If the same request is sent again, we get an error because the email and username are already taken:
+
+422 Unprocessable Entity
+{
+"email": ["has already been taken"],
+"username": ["has already been taken"],
+}
+~~~
+
+- Delete User
+~~~
+DELETE /users/1
+
+RESPONSE ON SUCCESS: 204 No Content
+RESPONSE ON FAILURE: 404 Not Found
+~~~
 
 - View User's Friends
 ~~~~
