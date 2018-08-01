@@ -55,7 +55,7 @@ User.all.each do |u|
 		p.body = Faker::Simpsons.quote
 		if (rand(0..1))
 			p.has_image = true
-			p.image_url = Faker::LoremPixel.image
+			p.image_url = Faker::LoremFlickr.image("800x600", ['abstract'])
 		end
 		p.save
 		puts p.body
