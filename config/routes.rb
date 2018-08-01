@@ -14,10 +14,10 @@
 #                               DELETE /users/:user_id/friends/:id(.:format)                                                    friends#destroy
 #                    user_posts GET    /users/:user_id/posts(.:format)                                                          posts#index
 #                               POST   /users/:user_id/posts(.:format)                                                          posts#create
-#                     user_post GET    /users/:user_id/posts/:id(.:format)                                                      posts#show
-#                               PATCH  /users/:user_id/posts/:id(.:format)                                                      posts#update
-#                               PUT    /users/:user_id/posts/:id(.:format)                                                      posts#update
-#                               DELETE /users/:user_id/posts/:id(.:format)                                                      posts#destroy
+#                          post GET    /posts/:id(.:format)                                                                     posts#show
+#                               PATCH  /posts/:id(.:format)                                                                     posts#update
+#                               PUT    /posts/:id(.:format)                                                                     posts#update
+#                               DELETE /posts/:id(.:format)                                                                     posts#destroy
 #                         users GET    /users(.:format)                                                                         users#index
 #                               POST   /users(.:format)                                                                         users#create
 #                          user GET    /users/:id(.:format)                                                                     users#show
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   	get "friends/index"
   	delete "friends/:id", to: "friends#destroy"
 
-    resources :posts
+    resources :posts, shallow: true
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
