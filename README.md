@@ -17,42 +17,7 @@ Messages
 - timestamp
 - location
 - images,etc
-
-Friends
-
-Last viewed message
- 
-
-$ rails new plurtech_api --api -T
-$ rails g scaffold user name email username phone
-
-TODO:
-
-Some setup you must do manually if you haven't yet:
-
-1. Ensure you have defined default url options in your environments files. Here
- is an example of default_url_options appropriate for a development environment
- in config/environments/development.rb:
-
-   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
- In production, :host should be set to the actual host of your application.
-
-2. Ensure you have defined root_url to *something* in your config/routes.rb.
- For example:
-
-   root to: "home#index"
-
-3. Ensure you have flash messages in app/views/layouts/application.html.erb.
- For example:
-
-   <p class="notice"><%= notice %></p>
-   <p class="alert"><%= alert %></p>
-
-4. You can copy Devise views (for customization) to your app by running:
-
-   rails g devise:views
-
+- Last viewed message
 
 ## Configuration and System dependencies
 - Ubuntu 16.04 LTS
@@ -74,13 +39,14 @@ $ rails db:seed
 
 ## API
 
-###Users
-- View all Users
+### Users
+
+View all Users
 ~~~~
 GET /users
 ~~~~
 
-- View Individual User
+View Individual User
 ~~~~
 GET /users/1
 GET /users/2
@@ -105,7 +71,8 @@ RESPONSE ON SUCCESS:
 RESPONSE ON FAILURE: 404 Not Found
 ~~~~
 
-- Create User
+Create User
+
 Constraints:
 1) username is unique
 2) name is between 4 and 70 characters
@@ -134,7 +101,7 @@ If the same request is sent again, we get an error because the email and usernam
 }
 ~~~
 
-- Update User
+Update User
 ~~~
 Update any attribute(s). Never attempt to update id, created_at and updated_at attributes:
 PATCH /users/5
@@ -159,7 +126,7 @@ Head: 200 OK
 }
 ~~~
 
-- Delete User
+Delete User
 ~~~
 DELETE /users/1
 
@@ -167,14 +134,14 @@ RESPONSE ON SUCCESS: 204 No Content
 RESPONSE ON FAILURE: 404 Not Found
 ~~~
 
-###Friendships
-- View User's Friends
+### Friendships
+View User's Friends
 ~~~
 GET /users/1/friends
 GET /users/2/friends
 ~~~
 
-- Delete Friend
+Delete Friend
 ~~~
 The following will delete user3 from user1's friend list. user3 is user having id 3 and user1 is user having id 1.
 
@@ -184,40 +151,63 @@ SUCCESS: 204 No Content
 FAILURE: 404 Not Found
 ~~~
 
-###Friend Requests
+### Friend Requests
 - View User's Incoming and Outgoing Friend Requests
 ~~~
 GET /users/1/friend_requests
 GET /users/2/friend_requests
 ~~~
 
-- View Incoming Friend Requests
+View Incoming Friend Requests
 ~~~~
 GET /users/1/friend_requests/incoming
 ~~~~
 
-- View User's Outgoing Friend Requests
+View User's Outgoing Friend Requests
 ~~~~
 GET /users/1/friend_requests/outgoing
 ~~~~
 
-- Create Friend Request
+Create Friend Request
 ~~~
 user1 sends a friend request to user4
 POST /users/1/friend_requests
 {"friend_id":"4"}
 ~~~
 
-- Accept Incoming Friend Request
-- Cancel Incoming Friend Request
-- Cancel Outgoing Friend Request
+Accept Incoming Friend Request
+Cancel Incoming Friend Request
+Cancel Outgoing Friend Request
 
-###Posts
+### Posts
 
-- View All User's Posts
+View All User's Posts
 ~~~~
 GET /users/1/posts
 ~~~~
+
+View one of User's Post
+~~~~
+GET /users/1/posts/1
+~~~~
+
+Create new Post
+~~~
+POST /users/1/posts
+{"body":"This is a post","has_image":true,"image_url":"https://loremflickr.com/cache/resized/4407_37320651181_594a3c8208_b_800_600_nofilter.jpg"}
+~~~
+
+Update Post
+~~~
+PATCH /posts/112
+{"body":"This is modified post 4"}
+~~~
+
+Delete Post
+~~~
+DELETE /posts/2
+~~~
+
 
 ## Easy Development
 - Shortcuts to SSH clients - https://askubuntu.com/questions/754450/shortcuts-to-ssh-clients
