@@ -196,6 +196,11 @@ GET /users/2/friend_requests
 GET /users/1/friend_requests/incoming
 ~~~~
 
+- View User's Outgoing Friend Requests
+~~~~
+GET /users/1/friend_requests/outgoing
+~~~~
+
 - Create Friend Request
 ~~~
 user1 sends a friend request to user4
@@ -204,27 +209,15 @@ POST /users/1/friend_requests
 ~~~
 
 - Accept Incoming Friend Request
+- Cancel Incoming Friend Request
+- Cancel Outgoing Friend Request
 
+###Posts
 
-- Deny Incoming Friend Request
-~~~
-DELETE /users/1/friend_requests/2
-~~~
-
-- View User's Outgoing Friend Requests
+- View All User's Posts
 ~~~~
-GET /users/1/friend_requests/outgoing
+GET /users/1/posts
 ~~~~
-
-- Create User
-- Update User
-- Destroy User
-
-- Create Friend Request
-- Accept Friend Request
-- Destroy Freind Request
-
-- Destroy Friend
 
 ## Easy Development
 - Shortcuts to SSH clients - https://askubuntu.com/questions/754450/shortcuts-to-ssh-clients
