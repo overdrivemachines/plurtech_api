@@ -167,11 +167,12 @@ RESPONSE ON SUCCESS: 204 No Content
 RESPONSE ON FAILURE: 404 Not Found
 ~~~
 
+###Friendships
 - View User's Friends
-~~~~
+~~~
 GET /users/1/friends
 GET /users/2/friends
-~~~~
+~~~
 
 - Delete Friend
 ~~~
@@ -183,16 +184,32 @@ SUCCESS: 204 No Content
 FAILURE: 404 Not Found
 ~~~
 
+###Friend Requests
 - View User's Incoming and Outgoing Friend Requests
-~~~~
+~~~
 GET /users/1/friend_requests
 GET /users/2/friend_requests
-~~~~
+~~~
 
-- View User's Incoming Friend Requests
+- View Incoming Friend Requests
 ~~~~
 GET /users/1/friend_requests/incoming
 ~~~~
+
+- Create Friend Request
+~~~
+user1 sends a friend request to user4
+POST /users/1/friend_requests
+{"friend_id":"4"}
+~~~
+
+- Accept Incoming Friend Request
+
+
+- Deny Incoming Friend Request
+~~~
+DELETE /users/1/friend_requests/2
+~~~
 
 - View User's Outgoing Friend Requests
 ~~~~
@@ -253,12 +270,12 @@ curl http://localhost:3000/users/new --cookie-jar "cookie.txt"
 curl http://localhost:3000/users --request POST --cookie-jar "cookie.txt" --cookie "cookie.txt" --data-urlencode "authenticity_token=cOusCzjDwAt6ybUCAICCw9W4Fq9jwOr8Tys7qn8+Sa6F/Pj/d8WzgisX7U6xEUrSUqQSBvi1WpK4GdXUdMoPOA==" --data "user[name]=Foo" --data "user[email]=foobar@gmail.com" --data "user[username]=foobar" --data "user[phone]=123" 
 ```
 
-
-
 ## References
 - Mutual friendship in Rails - https://dankim.io/mutual-friendship-rails/
 - Friendship fix - https://stackoverflow.com/questions/50614670/activerecordstatementinvalid-sqlite3sqlexception-no-such-table
 - Self-Referential Association - http://railscasts.com/episodes/163-self-referential-association
 - Faker::Avatar - https://github.com/stympy/faker/blob/master/doc/avatar.md
 - Pluck vs select. Pluck takes lesser time but select returns the actual object - http://gavinmiller.io/2013/getting-to-know-pluck-and-select/
-- Counter Cache - https://rubyplus.com/articles/3221-Counter-Cache-Column-in-Rails-5
+- Counter Cache 
+	- https://rubyplus.com/articles/3221-Counter-Cache-Column-in-Rails-5
+	- https://gorails.com/episodes/counter-caches
