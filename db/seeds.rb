@@ -48,10 +48,22 @@ FriendRequest.all.shuffle.each do |fr|
 	end
 end
 
-## Test Delete Friend
-User.all.shuffle.each do |u|
-	
+User.all.each do |u|
+	for i in 1..(rand(1..10)) do
+		p = u.posts.new
+		# p.body = Faker::Lorem.paragraph_by_chars(rand(1..250), false)
+		p.body = Faker::Simpsons.quote
+		if (rand(0..1))
+			p.has_image = true
+			p.image_url = Faker::LoremPixel.image
+		end
+		p.save
+		puts p.body
+		puts ""
+	end
 end
+
+
 
 # Friend
 # User.all.each do |u|
