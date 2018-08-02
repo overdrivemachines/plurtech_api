@@ -36,7 +36,7 @@ class User < ApplicationRecord
 		self.friend_requests.create(friend_id: f.id)
 	end
 	def cancel_friend_request(f)
-		# TODO
+		self.friend_requests.find_by_friend_id(f.id).destroy
 	end
 	def remove_friend(friend)
 		self.friends.destroy(friend)
@@ -59,11 +59,12 @@ class User < ApplicationRecord
 
 	# Accepts friend request from friend f
 	def accept_friend_request(fid)
-		if list_incoming_friend_requests.include?(fid)
-			# TODO
-			return true
-		else
+		fr = u.incoming_friend_requests.find_by_user_id(fid)
+		if fr.nil?
 			return false
+		else
+			fr.accept
+			return true
 		end
 	end
 
