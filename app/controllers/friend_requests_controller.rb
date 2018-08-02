@@ -18,7 +18,6 @@ class FriendRequestsController < ApplicationController
   # GET    /users/:user_id/friend_requests/incoming
   def incoming
     incoming = FriendRequest.where(friend: @user).pluck(:user_id)
-    incoming = FriendRequest.where(friend: @user).pluck(:user_id)
     render json: incoming
   end
 
@@ -53,11 +52,16 @@ class FriendRequestsController < ApplicationController
     end
   end
 
+  # PATCH/PUT  /users/:user_id/friend_requests/:id
   def update
-    @friend_request.accept
-    head :no_content
+    if @user.accept_friend_request(params[:id])
+      head :no_content
+    else
+      head :not_found
+    end
   end
 
+  # DELETE /users/:user_id/friend_requests/:id
   def destroy
     @friend_request.destroy
     head :no_content
@@ -66,14 +70,17 @@ class FriendRequestsController < ApplicationController
   private
 
   def set_friend
-    
+
   end
   def set_friend_request
-    @friend_request = FriendRequest.find(params[:id])
+
   end
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find_by_id(params[:user_id])
+    if (@user.nil?)
+      head :not_found
+    end
   end
 
   # Only allow a trusted parameter "white list" through.
