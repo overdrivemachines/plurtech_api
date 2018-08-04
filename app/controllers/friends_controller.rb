@@ -18,7 +18,7 @@ class FriendsController < ApplicationController
     else
       f.destroy
       head :no_content
-    end    
+    end
   end
 
   private
