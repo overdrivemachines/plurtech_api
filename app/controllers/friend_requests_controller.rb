@@ -53,6 +53,7 @@ class FriendRequestsController < ApplicationController
   end
 
   # PATCH/PUT  /users/:user_id/friend_requests/:id
+  # accept incoming friend request
   def update
     if @user.accept_friend_request(params[:id])
       head :no_content
@@ -62,8 +63,12 @@ class FriendRequestsController < ApplicationController
   end
 
   # DELETE /users/:user_id/friend_requests/:id
+  # Delete incoming friendship or outgoing friendship
   def destroy
-    @friend_request.destroy
+    # Destroy outgoing friend request
+    FriendRequest.find_by_user_id_and_friend_id(params[:user_id], params[:id]).destroy
+    # Destroy incoming friend request
+    # @friend_request.destroy
     head :no_content
   end
 
