@@ -31,17 +31,19 @@
 #          rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
+  
   root to: "users#index"
   resources :users do
   	get "friend_requests/incoming", to: "friend_requests#incoming"
   	get "friend_requests/outgoing", to: "friend_requests#outgoing"
     resources :friend_requests, except: [:show]
   	
-  	get "friends", to: "friends#index"
-  	get "friends/index"
+  	get 'friends/index'
   	delete "friends/:id", to: "friends#destroy"
 
     resources :posts, shallow: true
+
+    get 'welcome/feed'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
