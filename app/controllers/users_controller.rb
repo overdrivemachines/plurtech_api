@@ -19,6 +19,21 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  # GET /users/:user_id/feed
+  def feed
+    @user = User.find_by_id(params[:user_id])
+    if (@user.nil?)
+      head :not_found
+    end
+    @page = params[:page].to_i
+    if (@page < 0)
+      @page = 0
+    end
+    records_per_page = 5
+    @activities = PublicActivity::Activity.order(created_at: :desc).where(owner_id: @user.list_friends, owner_type: "User").offset((@page - 1) * records_per_page).limit(records_per_page)
+    render json: @activities
+  end
+
   # POST /users
   def create
     @user = User.new(user_params)
