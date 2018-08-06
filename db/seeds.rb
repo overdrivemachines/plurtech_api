@@ -60,6 +60,7 @@ User.all.each do |u|
 		p.save
 		puts p.body
 		puts ""
+		p.create_activity(:create, :owner => u)
 	end
 end
 

@@ -55,3 +55,8 @@ gem 'faker'
 # User authentication
 gem 'devise'
 gem 'omniauth'
+
+# Easy activity tracking for models
+gem 'public_activity'
+
+gem 'paging_cursor'
