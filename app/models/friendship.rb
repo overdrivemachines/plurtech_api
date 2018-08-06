@@ -22,7 +22,7 @@ class Friendship < ApplicationRecord
   #   rollback transaction
   # f.errors.full_messages
   #  => ["Friend already"]
-  validates :friend, presence: true, uniqueness: { scope: :user, message: "already" }
+  validates :friend, presence: true, uniqueness: { scope: :user, message: "is already a friend" }
   validate :not_self # Don't allow a user to friend themselves
 
   after_create :create_inverse_relationship
