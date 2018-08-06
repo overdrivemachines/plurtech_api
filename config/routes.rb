@@ -10,14 +10,15 @@
 #                               PUT    /users/:user_id/friend_requests/:id(.:format)                                            friend_requests#update
 #                               DELETE /users/:user_id/friend_requests/:id(.:format)                                            friend_requests#destroy
 #                  user_friends GET    /users/:user_id/friends(.:format)                                                        friends#index
-#            user_friends_index GET    /users/:user_id/friends/index(.:format)                                                  friends#index
-#                               DELETE /users/:user_id/friends/:id(.:format)                                                    friends#destroy
+#                               POST   /users/:user_id/friends(.:format)                                                        friends#create
+#                   user_friend DELETE /users/:user_id/friends/:id(.:format)                                                    friends#destroy
 #                    user_posts GET    /users/:user_id/posts(.:format)                                                          posts#index
 #                               POST   /users/:user_id/posts(.:format)                                                          posts#create
 #                          post GET    /posts/:id(.:format)                                                                     posts#show
 #                               PATCH  /posts/:id(.:format)                                                                     posts#update
 #                               PUT    /posts/:id(.:format)                                                                     posts#update
 #                               DELETE /posts/:id(.:format)                                                                     posts#destroy
+#                     user_feed GET    /users/:user_id/feed(.:format)                                                           users#feed
 #                         users GET    /users(.:format)                                                                         users#index
 #                               POST   /users(.:format)                                                                         users#create
 #                          user GET    /users/:id(.:format)                                                                     users#show
@@ -38,12 +39,12 @@ Rails.application.routes.draw do
   	get "friend_requests/outgoing", to: "friend_requests#outgoing"
     resources :friend_requests, except: [:show]
   	
-  	get 'friends/index'
-  	delete "friends/:id", to: "friends#destroy"
+  	# index create new show update destroy actions available
+    resources :friends, only: [:index, :create, :destroy]
 
     resources :posts, shallow: true
 
-    get 'welcome/feed'
+    get 'feed'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
