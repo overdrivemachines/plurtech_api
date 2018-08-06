@@ -81,6 +81,20 @@ Constraints:
 
 ~~~
 POST /users
+Headers:
+	accept: application/json
+	content-type: application/json
+Body:
+	{"name":"Dipen Chauhan","email":"get.dipen@gmail.com","username":"benward"}
+
+or
+
+Preferred way:
+Headers:
+content-type: application/json
+Body:
+{ "user":{ "name":"Dipen Chauhan", "email":"get.dipen@gmail.com", "username":"dipen.chauhan" }
+}
 ~~~
 
 RESPONSE ON SUCCESS:
