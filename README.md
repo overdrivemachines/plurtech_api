@@ -41,16 +41,17 @@ $ rails db:seed
 
 ### Users
 
-View all Users
+#### View all Users
 ~~~~
 GET /users
 ~~~~
 
-View Individual User
+#### View Individual User
 ~~~~
 GET /users/1
 GET /users/2
 GET /users/5
+~~~~
 RESPONSE ON SUCCESS:
 {
 "id": 5,
@@ -69,24 +70,18 @@ RESPONSE ON SUCCESS:
 }
 
 RESPONSE ON FAILURE: 404 Not Found
-~~~~
 
-Create User
+
+#### Create User
 
 Constraints:
 1) username is unique
 2) name is between 4 and 70 characters
 3) email must be of valid format
+
 ~~~
-
-
 POST /users
-curl -i \
--H "Accept: application/json" \
--H "Content-type: application/json" \
--X POST \
--d '{"name":"Dipen Chauhan", "email":"get.dipen@gmail.com", "username":"dipen.chauhan"}' \
-http://localhost:3000/users
+~~~
 
 RESPONSE ON SUCCESS:
 201 Created
@@ -99,13 +94,15 @@ If the same request is sent again, we get an error because the email and usernam
 "email": ["has already been taken"],
 "username": ["has already been taken"],
 }
-~~~
 
-Update User
-~~~
+#### Update User
+
 Update any attribute(s). Never attempt to update id, created_at and updated_at attributes:
+~~~
 PATCH /users/5
 {"name":"Dipen Chauhan","email":"get.dipen@gmail.com","username":"dc555"}
+~~~
+Response:
 
 Head: 200 OK
 
@@ -124,88 +121,108 @@ Head: 200 OK
 "created_at": "2018-07-31T00:52:08.792Z",
 "updated_at": "2018-07-31T02:21:31.074Z"
 }
-~~~
 
-Delete User
+
+#### Delete User
 ~~~
 DELETE /users/1
-
+~~~
 RESPONSE ON SUCCESS: 204 No Content
 RESPONSE ON FAILURE: 404 Not Found
-~~~
+
 
 ### Friendships
-View User's Friends
+
+#### View User's Friends
 ~~~
-GET /users/1/friends
-GET /users/2/friends
+GET /users/1/friends/index
+GET /users/2/friends/index
 ~~~
 
-Delete Friend
+#### Add Friend without Friend Request
 ~~~
+POST /users/1/friends
+Request Body:
+{ "friendship": { "friend_id": "4" } }
+~~~
+
+#### Delete Friend
+
 The following will delete user3 from user1's friend list. user3 is user having id 3 and user1 is user having id 1.
-
+~~~
 DELETE /users/1/friends/3
-
+~~~
 SUCCESS: 204 No Content
 FAILURE: 404 Not Found
-~~~
+
 
 ### Friend Requests
-- View User's Incoming and Outgoing Friend Requests
+
+#### View User's Incoming and Outgoing Friend Requests
 ~~~
 GET /users/1/friend_requests
 GET /users/2/friend_requests
 ~~~
 
-View Incoming Friend Requests
+#### View Incoming Friend Requests
 ~~~~
 GET /users/1/friend_requests/incoming
 ~~~~
 
-View User's Outgoing Friend Requests
+#### View User's Outgoing Friend Requests
 ~~~~
 GET /users/1/friend_requests/outgoing
 ~~~~
 
-Create Friend Request
+#### Create Friend Request
 ~~~
 user1 sends a friend request to user4
 POST /users/1/friend_requests
 {"friend_id":"4"}
 ~~~
 
-Accept Incoming Friend Request
-Cancel Incoming Friend Request
-Cancel Outgoing Friend Request
+#### Accept Incoming Friend Request
+~~~
+PATCH /users/1/friend_requests/accept
+
+~~~
+
+#### Cancel Incoming Friend Request
+
+#### Cancel Outgoing Friend Request
 
 ### Posts
 
-View All User's Posts
+#### View All User's Posts
 ~~~~
 GET /users/1/posts
 ~~~~
 
-View one of User's Post
+#### View one of User's Post
 ~~~~
 GET /users/1/posts/1
 ~~~~
 
-Create new Post
+#### Create new Post
 ~~~
 POST /users/1/posts
 {"body":"This is a post","has_image":true,"image_url":"https://loremflickr.com/cache/resized/4407_37320651181_594a3c8208_b_800_600_nofilter.jpg"}
 ~~~
 
-Update Post
+#### Update Post
 ~~~
 PATCH /posts/112
 {"body":"This is modified post 4"}
 ~~~
 
-Delete Post
+#### Delete Post
 ~~~
 DELETE /posts/2
+~~~
+
+#### View User's Feed
+~~~
+GET /users/1/feed
 ~~~
 
 
@@ -251,6 +268,14 @@ curl http://localhost:3000/users/new --cookie-jar "cookie.txt"
 # after this command, you will see a authenticity_token, please remember it.
 
 curl http://localhost:3000/users --request POST --cookie-jar "cookie.txt" --cookie "cookie.txt" --data-urlencode "authenticity_token=cOusCzjDwAt6ybUCAICCw9W4Fq9jwOr8Tys7qn8+Sa6F/Pj/d8WzgisX7U6xEUrSUqQSBvi1WpK4GdXUdMoPOA==" --data "user[name]=Foo" --data "user[email]=foobar@gmail.com" --data "user[username]=foobar" --data "user[phone]=123" 
+
+POST /users
+curl -i \
+-H "Accept: application/json" \
+-H "Content-type: application/json" \
+-X POST \
+-d '{"name":"Dipen Chauhan", "email":"get.dipen@gmail.com", "username":"dipen.chauhan"}' \
+http://localhost:3000/users
 ```
 
 ## References
